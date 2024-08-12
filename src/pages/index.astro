@@ -1,6 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+
+import { getCollection, getEntry } from 'astro:content';
+
+// Get all entries from a collection.
+// Requires the name of the collection as an argument.
+// Example: retrieve `src/content/blog/**`
+const allDocs = await getCollection('docs');
+
+console.log(allDocs)
+
+// Get a single entry from a collection.
+// Requires the name of the collection and either
+// the entry `slug` (content collections) or `id` (data collections)
+// Example: retrieve `src/content/authors/grace-hopper.json`
+const graceHopperProfile = await getEntry('authors', 'grace-hopper');
+
+
 ---
 
 <Layout title="Welcome to Astro.">
@@ -38,6 +55,18 @@ import Card from '../components/Card.astro';
 			To get started, open the directory <code>src/pages</code> in your project.<br />
 			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
 		</p>
+
+			    <h1>Document List</h1>
+		<nav>
+			<ul>
+				{allDocs.map(doc => (
+				<li key={doc.slug}>
+					<a href={`/docs/${doc.slug}`}>{doc.slug}</a>
+				</li>
+				))}
+			</ul>
+		</nav>
+
 		<ul role="list" class="link-card-grid">
 			<Card
 				href="https://docs.astro.build/"
