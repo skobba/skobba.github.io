@@ -3,6 +3,9 @@
 ## Dynamic routing
 The process of creating multiple page routes from one file in Astro with ```[..tag].astro```files.
 
+## Schema
+In order for Astro to recognize your schema, quit the dev server (CTRL + C) and run the following command: ```npx astro sync. This ```.
+
 ## Refactor
 An Astro component (.astro file) can function as a:
 * page
