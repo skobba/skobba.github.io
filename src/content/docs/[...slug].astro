@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { getCollection } from 'astro:content';
 import DocLayout from '../../layouts/DocLayout.astro';
 
 export async function getStaticPaths() {
@@ -19,6 +19,21 @@ const slug = Astro.params.slug;
 const doc = docs.find(d => d.slug === slug);
 
 const { Content } = await doc.render();
+
+console.log('**************************************************')
+console.log('**************************************************')
+console.log('**************************************************')
+console.log('**************************************************')
+console.log('**************************************************')
+console.log('**************************************************')
+console.log('**************************************************')
+console.log('**************************************************')
+console.log('**************************************************')
+console.log('**************************************************')
+console.log('**************************************************')
+console.log('**************************************************')
+console.log('**************************************************')
+console.log('**************************************************')
 ---
 
 <DocLayout {...doc.data}>
