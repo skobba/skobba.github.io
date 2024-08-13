@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/DocLayout.astro
 title: Pod
 ---
 

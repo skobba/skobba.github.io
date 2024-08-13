@@ -15,9 +15,9 @@ console.log(allDocs)
 // Requires the name of the collection and either
 // the entry `slug` (content collections) or `id` (data collections)
 // Example: retrieve `src/content/authors/grace-hopper.json`
-const graceHopperProfile = await getEntry('authors', 'grace-hopper');
+const graceHopperProfile = await getEntry('data', 'pod');
 
-
+console.log(graceHopperProfile);
 ---
 
 <Layout title="Welcome to Astro.">
