@@ -1,3 +1,7 @@
+---
+layout: ../../../layouts/VelvetLayout.astro
+---
+
 # Kubernetes
 
 ## Sample image

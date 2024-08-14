@@ -1,4 +1,14 @@
 ---
+import DefaultLayout from './DefaultLayout.astro';
+
+const { Content, frontmatter } = Astro.props;
+---
+
+<DefaultLayout title={'Default Title'}>
+  <Content />
+</DefaultLayout>
+
+<!-- ---
 import MarkdownPostLayout from '../layouts/MarkdownPostLayout.astro';
 import { content } from 'astro:content';
 
@@ -7,4 +17,4 @@ const { frontmatter, Content } = Astro.props;
 
 <MarkdownPostLayout frontmatter={frontmatter}>
   <Content />
-</MarkdownPostLayout>
+</MarkdownPostLayout> -->
