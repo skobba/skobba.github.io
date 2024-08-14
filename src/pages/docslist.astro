@@ -1,11 +1,17 @@
 ---
 import fs from 'fs';
 import path from 'path';
-
+// import DocsList from '../components/DocsList.astro'
 const filePath = path.resolve('./src/pages/docs/file-list.json');
 const fileList = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
----
 
+const docs = await Astro.glob('/src/pages/docs/**/*.md');
+
+---
+<h1>DocsList</h1>
+<pre>{JSON.stringify(docs, null, 2)}</pre>
+
+<h1>JSON List</h1>
 <ul>
     
   { 
