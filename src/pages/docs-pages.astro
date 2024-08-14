@@ -1,0 +1,30 @@
+---
+// src/pages/docs.astro
+
+// Fetch Markdown files
+const docs = await Astro.glob('/src/pages/docs/**/*.md');
+
+// Generate links for each Markdown document
+const docLinks = docs.map((doc) => {
+  // Extract the slug (path without the `.md` extension)
+  const slug = doc.url.replace('/src/pages', '').replace('.md', '');
+  return { url: slug, title: doc.frontmatter.title || slug };
+});
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation</title>
+</head>
+<body>
+  <h1>Documentation</h1>
+  <ul>
+    {docLinks.map((doc) => (
+      <li><a href={doc.url}>{doc.title}</a></li>
+    ))}
+  </ul>
+</body>
+</html>

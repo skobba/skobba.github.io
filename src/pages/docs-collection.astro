@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Fetch collection
+const docs = await getCollection("docs");
+
+// Generate links for each Markdown document
+const docLinks = docs.map((doc) => {
+    console.log(doc)
+    const { slug, data } = doc;
+  // Extract the slug (path without the `.md` extension)
+  //const slug = doc.url.replace('/src', '').replace('.md', '');
+  return { url: `docs/${slug}`, title: data.title };
+});
+---
+
+<BaseLayout pageTitle = {'Documentation'}>
+    <ul>
+      {docLinks.map((doc) => (
+        <li><a href={doc.url}>{doc.url}</a></li>
+      ))}
+    </ul>
+</BaseLayout>
+

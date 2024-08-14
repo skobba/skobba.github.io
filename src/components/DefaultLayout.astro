@@ -1,0 +1,19 @@
+---
+const { title, content } = Astro.props;
+---
+
+<html>
+<head>
+  <title>{title}</title>
+</head>
+<body>
+  <header>
+    <h1>Using DefaultLayout</h1>
+  </header>
+  <main>
+    {content}
+  </main>
+  <footer>
+  </footer>
+</body>
+</html>

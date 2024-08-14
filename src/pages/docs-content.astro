@@ -1,0 +1,62 @@
+---
+// src/pages/docs.astro
+
+import DefaultLayout from '../components/DefaultLayout.astro';
+
+// Fetch Markdown files
+const docs = await Astro.glob('/src/content/docs/**/*.md');
+console.log(docs);
+
+docs.forEach((doc) => {
+  console.log('Frontmatter:', doc.frontmatter); // Access the frontmatter
+  console.log('File Path:', doc.file);         // Access the file path
+  console.log('URL:', doc.url);                // Access the URL
+  console.log('Raw Content:', doc.rawContent); // Access the raw Markdown content
+  console.log('Compiled Content:', doc.compiledContent); // Access the compiled HTML content
+  console.log('Headings:', doc.getHeadings()); // Access the headings
+  console.log('Content Component:', doc.Content); // Access the rendered content component
+});
+
+
+// Map through the docs and render each with the layout
+const docLinks = docs.map((doc) => {
+  console.log('Frontmatter:', doc.frontmatter); // Access the frontmatter
+  console.log('File Path:', doc.file);         // Access the file path
+  console.log('URL:', doc.url);                // Access the URL
+  console.log('Raw Content:', doc.rawContent); // Access the raw Markdown content
+  console.log('Compiled Content:', doc.compiledContent); // Access the compiled HTML content
+  console.log('Headings:', doc.getHeadings()); // Access the headings
+  console.log('Content Component:', doc.Content); // Access the rendered content component
+  // const slug = doc.url.replace('/src/content/docs', '').replace('.md', '');
+  // return { url: `/docs${slug}`, title: doc.frontmatter.title || slug };
+});
+
+// Function to generate Markdown content with layout
+const getMarkdownContent = async (path) => {
+  const { default: Component } = await import(`../pages/${path}.md`);
+  const content = Component.render().html;
+  return content;
+};
+
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation</title>
+</head>
+<body>
+  <h1>Documentation</h1>
+  <ul>
+    {docLinks.map((doc) => (
+      <li>
+        <a href={`/docs/${doc.path}`} onClick={(e) => { e.preventDefault(); /* Load document content dynamically */ }}>
+          {doc.path}
+        </a>
+      </li>
+    ))}
+  </ul>
+</body>
+</html>

@@ -15,7 +15,13 @@ const postsCollection = defineCollection({
       tags: z.array(z.string())
     })
 });
+
+const docsCollection = defineCollection({
+  type: 'content'
+});
+
 // Export a single `collections` object to register your collection(s)
 export const collections = {
   posts: postsCollection,
+  docs: docsCollection,
 };

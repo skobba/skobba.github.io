@@ -1,12 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
-import MarkdownPostLayout from '../../layouts/MarkdownPostLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('posts');
-  console.log('******************************* getStaticPaths *******************************', blogEntries )
-  console.log(blogEntries);
-  return blogEntries.map(entry => ({
+  const docs = await getCollection('docs');
+  console.log('******************************* getStaticPaths *******************************', docs )
+  console.log(docs);
+  return docs.map(entry => ({
     params: { slug: entry.slug }, props: { entry },
   }));
 }
@@ -32,7 +33,11 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<Content />
+<BaseLayout pageTitle = {'pageTitle'}>
+  <Content />
+</BaseLayout>
+
+
 
 <!-- <MarkdownPostLayout frontmatter={entry.data}>
   <Content />

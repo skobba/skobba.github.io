@@ -1,5 +1,7 @@
-# Astro
-
+---
+layout: ../layouts/BaseLayout.astro
+title: Astro
+---
 ## Dynamic routing
 The process of creating multiple page routes from one file in Astro with ```[..tag].astro```files.
 
