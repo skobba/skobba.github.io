@@ -12,6 +12,9 @@ tags: ["astro", "blogging", "learning in public"]
 
 Welcome to my _new blog_ about learning Astro! Here, I will share my learning journey as I build a new website.
 
+## Image Sample
+![api-overview.png](api-overview.png)
+
 ## What I've accomplished
 
 1. **Installing Astro**: First, I created a new Astro project and set up my online accounts.
@@ -20,8 +23,6 @@ Welcome to my _new blog_ about learning Astro! Here, I will share my learning jo
 
 3. **Making Blog Posts**: This is my first blog post! I now have Astro pages and Markdown posts!
 
-## Image Sample
-![api-overview.png](api-overview.png)
 
 ## What's next
 
