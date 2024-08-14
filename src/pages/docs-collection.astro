@@ -11,7 +11,7 @@ const docLinks = docs.map((doc) => {
     const { slug, data } = doc;
   // Extract the slug (path without the `.md` extension)
   //const slug = doc.url.replace('/src', '').replace('.md', '');
-  return { url: `docs/${slug}`, title: data.title };
+  return { url: `/docs/${slug}`, title: data.title };
 });
 ---
 
