@@ -4,21 +4,39 @@ import MarkdownPostLayout from '../../layouts/MarkdownPostLayout.astro';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('posts');
+  console.log(blogEntries);
   return blogEntries.map(entry => ({
     params: { slug: entry.slug }, props: { entry },
   }));
+}
+
+export async function get({ params }) {
+  const { slug } = params;
+  console.log('*********** slug: ', slug)
+  const post = await getCollection('posts', ({ slug: entrySlug }) =>
+    entrySlug === slug.join('/')
+  );
+
+  if (!post) {
+    console.log('*********** not found *********** ');
+    return { notFound: true };
+  }
+
+  return {
+    props: { post },
+  };
 }
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<!-- 
-Origintaly from the online tutorial:
-<MarkdownPostLayout frontmatter={entry.data}>
-  <Content />
-</MarkdownPostLayout>
-
--->
-
 <Content />
+
+<!-- <MarkdownPostLayout frontmatter={entry.data}>
+  <Content />
+  </MarkdownPostLayout> -->
+  
+  <!-- 
+<Content />
+-->

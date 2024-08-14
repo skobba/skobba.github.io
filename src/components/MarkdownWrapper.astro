@@ -1,0 +1,10 @@
+---
+import MarkdownPostLayout from '../layouts/MarkdownPostLayout.astro';
+import { content } from 'astro:content';
+
+const { frontmatter, Content } = Astro.props;
+---
+
+<MarkdownPostLayout frontmatter={frontmatter}>
+  <Content />
+</MarkdownPostLayout>
