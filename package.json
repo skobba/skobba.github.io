@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "verbose": "npm run dev -- --verbose",
     "start": "astro dev",
+    "prebuild": "node src/scripts/list-md-files-in-docs.js > src/pages/docs/file-list.json",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"

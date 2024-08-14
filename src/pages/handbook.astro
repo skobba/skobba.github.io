@@ -1,0 +1,23 @@
+---
+import fs from 'fs';
+import path from 'path';
+
+const filePath = path.resolve('./src/pages/docs/file-list.json');
+const fileList = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+---
+
+<ul>
+    
+  { 
+
+    fileList.map(file => {
+        const fil = file.replace(/\.[^/.]+$/, "")
+        console.log(fil)
+        return (
+            <li>
+                <a href={`/docs/${fil}`}>{fil}</a>
+            </li>
+        )}
+    )}
+
+</ul>
