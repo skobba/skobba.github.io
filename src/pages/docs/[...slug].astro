@@ -29,16 +29,15 @@ export async function getStaticPaths() {
 // ]
 
   // Fetch all Markdown files and images
-  const docs = await Astro.glob('/src/content/docs/**/*.md');
+  //const docs = await Astro.glob('/src/content/docs/**/*.md');
   const images = await Astro.glob('/src/content/docs/**/*.png');
+
+  const docs = await getCollection('docs');
 
   // Combine paths for Markdown and image files
   const paths = [
     ...docs.map(doc => {
-      console.log('doc: ', doc)
-      const url = doc.file.replace('/Users/rep/gitskobba/skobba.github.io/src/content/docs/', '');
-      console.log(url)
-      const slug = url.replace('.md', '');
+      const { slug } = doc;
       return { params: { slug }, props: { entry: doc } };
     }),
     // ...images.map(img => {
