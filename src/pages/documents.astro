@@ -1,0 +1,5 @@
+---
+const docs = await Astro.glob('/src/pages/docs/**/*.md');
+---
+<h1>DocsList</h1>
+<pre>{JSON.stringify(docs, null, 2)}</pre>
