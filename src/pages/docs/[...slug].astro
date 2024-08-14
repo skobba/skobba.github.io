@@ -1,48 +1,127 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { configPaths } from 'astro/dist/core/config';
+
+// Fetch all Markdown files
+const docs = await getCollection('docs');
+
+// Get the current slug from the URL
+const { slug } = Astro.params;
+
+// Find the corresponding document
+const currentDoc = docs.find(doc => doc.slug === slug);
+console.log('currentDoc: ', currentDoc)
+
+
 
 
 export async function getStaticPaths() {
-  const docs = await getCollection('docs');
-  console.log('******************************* getStaticPaths *******************************', docs )
-  console.log(docs);
-  return docs.map(entry => ({
-    params: { slug: entry.slug }, props: { entry },
-  }));
+
+//   return [
+//   { params: { slug: 'api/api' }, props: { entry: [Object] } },
+//   { params: { slug: 'git/git' }, props: { entry: [Object] } },
+//   {
+//     params: { slug: 'kubernetes/kubernetes' },
+//     props: { entry: [Object] }
+//   },
+//   { params: { slug: 'start' }, props: { entry: [Object] } }
+// ]
+
+  // Fetch all Markdown files and images
+  const docs = await Astro.glob('/src/content/docs/**/*.md');
+  const images = await Astro.glob('/src/content/docs/**/*.png');
+
+  // Combine paths for Markdown and image files
+  const paths = [
+    ...docs.map(doc => {
+      console.log('doc: ', doc)
+      const url = doc.file.replace('/Users/rep/gitskobba/skobba.github.io/src/content/docs/', '');
+      console.log(url)
+      const slug = url.replace('.md', '');
+      return { params: { slug }, props: { entry: doc } };
+    }),
+    // ...images.map(img => {
+    //   console.log(img)
+    //   // const slug = img.default.url.replace('/@fs/Users/rep/gitskobba/skobba.github.io/src/content/', '').replace(/\.(jpg|jpeg|png|gif)$/, '');
+    //   // return { params: { slug } };
+    //   return
+    // })
+  ];
+
+  console.log('paths: ', paths)
+  return paths;
+
+  // return {
+  //   paths,
+  //   fallback: '404' // or 'true'/'false' depending on your needs
+  // };
 }
 
-export async function get({ params }) {
-  const { slug } = params;
-  console.log('*********** slug: ', slug)
-  const post = await getCollection('posts', ({ slug: entrySlug }) =>
-    entrySlug === slug.join('/')
-  );
 
-  if (!post) {
-    console.log('*********** not found *********** ');
-    return { notFound: true };
-  }
+// export async function getStaticPaths() {
+//   const docs = await getCollection('docs');
+//   console.log('******************************* getStaticPaths *******************************', docs )
 
-  return {
-    props: { post },
-  };
-}
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+//   const images = await Astro.glob('/src/content/docs/**/*.png');
+//   console.log('********* images *******', images)
+
+//   const paths = docs.map(entry => ({
+//     params: { slug: entry.slug }, props: { entry },
+//   }));
+  
+//   console.log('paths: ', paths);
+//   return paths;
+// }
+
+
+// // Fetch all Markdown files and images
+// export async function getStaticPaths() {
+//   console.log('******************************* getStaticPaths *******************************', docs )
+
+//   // Fetch all Markdown files
+//   const docs = await Astro.glob('/src/content/docs/**/*.md');
+  
+//   // Fetch all image files
+//   const images = await Astro.glob('/src/content/docs/**/*.png');
+
+//   // Combine paths from Markdown and image files
+//   const paths = [
+//     ...docs.map(doc => {
+//       const slug = doc.file.replace('/src/content/docs/', '').replace('.md', '');
+//       return { params: { slug } };
+//     }),
+//     ...images.map(img => {
+//       const slug = img.file.replace('/src/content/docs/', '').replace(/\.(jpg|jpeg|png|gif)$/, '');
+//       return { params: { slug } };
+//     })
+//   ];
+
+//   return paths;
+// }
+
+// export async function get({ params }) {
+//   const { slug } = params;
+//   console.log('*********** slug: ', slug)
+//   const post = await getCollection('posts', ({ slug: entrySlug }) =>
+//     entrySlug === slug.join('/')
+//   );
+
+//   if (!post) {
+//     console.log('*********** not found *********** ');
+//     return { notFound: true };
+//   }
+
+//   return {
+//     props: { post },
+//   };
+// }
+
+
+
+const { Content } = await currentDoc.render();
 ---
-
-<BaseLayout pageTitle = {'pageTitle'}>
+<BaseLayout pageTitle = {''}>
   <Content />
 </BaseLayout>
-
-
-
-<!-- <MarkdownPostLayout frontmatter={entry.data}>
-  <Content />
-  </MarkdownPostLayout> -->
-  
-  <!-- 
-<Content />
--->
