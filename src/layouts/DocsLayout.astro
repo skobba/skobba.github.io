@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+
+console.log(Astro.props)
+const { frontmatter } = Astro.props;
+---
+<BaseLayout>
+  <slot />
+</BaseLayout>

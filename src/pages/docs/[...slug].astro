@@ -1,8 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { configPaths } from 'astro/dist/core/config';
-import MarkdownWrapper from '../../components/MarkdownWrapper.astro';
+import DocsLayout from '../../layouts/DocsLayout.astro';
 
 // Fetch all Markdown files
 const docs = await getCollection('docs');
@@ -122,7 +120,9 @@ export async function getStaticPaths() {
 
 const { Content } = await currentDoc.render();
 ---
-<MarkdownWrapper Content={Content} frontmatter={} />
+<DocsLayout Content={Content} frontmatter={}>
+  <Content/>
+</DocsLayout>
 
 <!-- <BaseLayout pageTitle = {''}>
   <Content />

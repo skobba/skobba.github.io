@@ -3,18 +3,30 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/global.css';
 
 
-const docs = await Astro.glob('/src/content/docs/**/*.md');
+const docs = await Astro.glob('/src/pages/pgs/**/*.md');
+
+console.log('docs: ', docs)
 
 const pageTitle = 'skobba.net';
 ---
 <BaseLayout pageTitle = {pageTitle}>
-  <h2>Some documents</h2>
+  <h2>Pages</h2>
+  <h3>Search Path: /src/pages/pgs</h3>
 
   <ul>
-    <li><a href="/pgs">/pgs</a></li>
-    <li><a href="/pgs/kubernetes/kubernetes">/pgs/kubernetes/kubernetes</a></li>
-    <li><a href="/pgs/git/git">/pgs/git/git</a></li>
-    <li><a href="/pgs/start">/pgs/start</a></li>
-    <li><a href="/pgs/styles">/pgs/styles</a></li>
+    { 
+      docs.map(doc => {
+          const filePathWithoutExt = doc.file.replace(/\.[^/.]+$/, "")
+          const filePath = filePathWithoutExt.replace(/.*\/src\/pages/, '');
+          console.log(filePath)
+          return (
+              <li>
+                  <a href={`${filePath}`}>{filePath}</a>
+              </li>
+          )}
+      )}
   </ul>
+
+  <h3>Debug:</h3>
+  <pre>{JSON.stringify(docs, null, 2)}</pre>
 </BaseLayout>
