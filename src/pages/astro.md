@@ -34,3 +34,16 @@ Don’t forget to:
 ** CSS rules in a ```<style>``` tag (e.g. ```<h1>``` in your About page)
 ** ```<script>``` tags
 
+## set:HTML
+```astro
+---
+const rawHTMLString = "Hello <strong>World</strong>"
+---
+<h1>{rawHTMLString}</h1>
+  <!-- Output: <h1>Hello &lt;strong&gt;World&lt;/strong&gt;</h1> -->
+<h1 set:html={rawHTMLString} />
+  <!-- Output: <h1>Hello <strong>World</strong></h1> -->
+```
+
+
+
