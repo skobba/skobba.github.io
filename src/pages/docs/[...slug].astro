@@ -33,18 +33,33 @@ export async function getStaticPaths() {
     // })
   ];
 
-  console.log('paths: ', paths)
+  // console.log('paths: ', paths)
   return paths;
 
 }
 
+// FIX FOR MISSING FILE PATH from astro collection!
+// Find file path for github by looking up the file path from Astro.glob 
+// Use Astro.glob to get all files
+const files = await Astro.glob('/src/content/docs/**/*.md');
+
+// Find the file that matches the id
+const matchingFile = files.find(file => {
+  // Normalize the path (relative to the content directory) to match the id from getCollection
+
+  const filePath = file.file.replace(/.*\/src\/content\/docs\//, ''); // Remove prefix path
+
+  return filePath === currentDoc.id;
+});
+
+// Generate github link
+const missingLink = matchingFile?.file.replace(/.*\/src\/content\/docs\//, '');
+const githubLink = `https://github.com/skobba/skobba.github.io/blob/main/src/content/docs/${missingLink}`
 
 const { Content } = await currentDoc.render();
-const githubLink = `https://github.com/skobba/skobba.github.io/blob/main/src/content/docs/${currentDoc.slug}.md`
 ---
 <DocsLayout Content={Content} frontmatter={}>
   <a href={githubLink} target="_blank" rel="noopener noreferrer">Edit on GitHub</a>
-
   <Content/>
 </DocsLayout>
 

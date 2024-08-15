@@ -17,7 +17,6 @@ const pageTitle = 'skobba.net';
       docs.map(doc => {
           const filePathWithoutExt = doc.file.replace(/\.[^/.]+$/, "")
           const filePath = filePathWithoutExt.replace(/.*\/src\/pages/, '');
-          console.log(filePath)
           return (
               <li>
                   <a href={`${filePath}`}>{filePath}</a>

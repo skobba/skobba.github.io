@@ -4,8 +4,7 @@ import MarkdownPostLayout from '../../layouts/MarkdownPostLayout.astro';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('posts');
-  console.log('******************************* getStaticPaths *******************************', blogEntries )
-  console.log(blogEntries);
+  // console.log('******************************* getStaticPaths *******************************', blogEntries )
   return blogEntries.map(entry => ({
     params: { slug: entry.slug }, props: { entry },
   }));
@@ -13,7 +12,7 @@ export async function getStaticPaths() {
 
 export async function get({ params }) {
   const { slug } = params;
-  console.log('*********** slug: ', slug)
+  // console.log('*********** slug: ', slug)
   const post = await getCollection('posts', ({ slug: entrySlug }) =>
     entrySlug === slug.join('/')
   );
