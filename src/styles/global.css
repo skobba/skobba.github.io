@@ -3,6 +3,12 @@ html {
   font-family: sans-serif;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 html.dark {
   background-color: #0d0950;
   color: #fff;
