@@ -1,73 +1,11 @@
 ---
-import { getCollection } from "astro:content";
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import DocsMenu from '../../components/DocsMenu.astro';
 
-// Fetch collection
-const docs = await getCollection("docs");
-
-// Generate links for each Markdown document
-const docLinks = docs.map((doc) => {
-    console.log(doc)
-    const { slug, data } = doc;
-  // Extract the slug (path without the `.md` extension)
-  //const slug = doc.url.replace('/src', '').replace('.md', '');
-  return `/docs/${slug}`;
-});
-
-// Function to generate nested UL/LI structure
-function generateMenu(links) {
-    const menu = {};
-
-    // Build the nested object structure
-    links.forEach(link => {
-        const parts = link.split('/').filter(Boolean);
-        let current = menu;
-
-        parts.forEach((part, index) => {
-            if (!current[part]) {
-                current[part] = index === parts.length - 1 ? link : {};
-            }
-            current = current[part];
-        });
-    });
-
-    // Function to convert the object to HTML
-    function buildList(items) {
-        let ul = '<ul>';
-        for (let key in items) {
-            if (typeof items[key] === 'string') {
-                ul += `<li><a href="${items[key]}">${key}</a></li>`;
-            } else {
-                ul += `<li>${key}${buildList(items[key])}</li>`;
-            }
-        }
-        ul += '</ul>';
-        return ul;
-    }
-
-    return buildList(menu);
-}
-
-// Generate the HTML for the menu
-const menuHtml = generateMenu(docLinks);
 ---
 
-<BaseLayout pageTitle = {'Documentation'}>
-    <h2>Documents</h2>
-    <h3>Search Path: /src/content/docs</h3>
-
-    <!-- Render the generated menu directly -->
-    <div id="menu" set:html={menuHtml}/>
-
-
-    <!-- <h3>Plain List:</h3>
-    <ul>
-      {docLinks.map((link) => (
-        <li><a href={link}>{link}</a></li>
-      ))}
-    </ul> -->
-
-    <!-- <h3>Debug:</h3>
-    <pre>{JSON.stringify(docs, null, 2)}</pre> -->
-</BaseLayout>
+<DocsLayout pageTitle = {'Documentation'}>
+    <h2>Developer Handbook</h2>
+    <h3>Various developer related articles.</h3>
+</DocsLayout>
 

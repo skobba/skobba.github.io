@@ -1,0 +1,56 @@
+---
+import { getCollection } from "astro:content";
+
+// Fetch collection
+const docs = await getCollection("docs");
+
+// Generate links for each Markdown document
+const docLinks = docs.map((doc) => {
+    // console.log(doc)
+    const { slug, data } = doc;
+  // Extract the slug (path without the `.md` extension)
+  //const slug = doc.url.replace('/src', '').replace('.md', '');
+  return `/docs/${slug}`;
+});
+
+// Function to generate nested UL/LI structure
+function generateMenu(links) {
+    const menu = {};
+
+    // Build the nested object structure
+    links.forEach(link => {
+        const parts = link.split('/').filter(Boolean);
+        let current = menu;
+
+        parts.forEach((part, index) => {
+            if (!current[part]) {
+                current[part] = index === parts.length - 1 ? link : {};
+            }
+            current = current[part];
+        });
+    });
+
+    // Function to convert the object to HTML
+    function buildList(items) {
+        let ul = '<ul>';
+        for (let key in items) {
+            if (typeof items[key] === 'string') {
+                ul += `<li><a href="${items[key]}">${key}</a></li>`;
+            } else {
+                ul += `<li>${key}${buildList(items[key])}</li>`;
+            }
+        }
+        ul += '</ul>';
+        return ul;
+    }
+
+    return buildList(menu);
+}
+
+// Generate the HTML for the menu
+const menuHtml = generateMenu(docLinks);
+---
+
+<!-- Render the generated menu directly -->
+<div class="menu" id="menu" set:html={menuHtml}/>
+

@@ -10,25 +10,11 @@ const { slug } = Astro.params;
 
 // Find the corresponding document
 const currentDoc = docs.find(doc => doc.slug === slug);
-console.log('currentDoc: ', currentDoc)
-
-
 
 
 export async function getStaticPaths() {
 
-//   return [
-//   { params: { slug: 'api/api' }, props: { entry: [Object] } },
-//   { params: { slug: 'git/git' }, props: { entry: [Object] } },
-//   {
-//     params: { slug: 'kubernetes/kubernetes' },
-//     props: { entry: [Object] }
-//   },
-//   { params: { slug: 'start' }, props: { entry: [Object] } }
-// ]
-
   // Fetch all Markdown files and images
-  //const docs = await Astro.glob('/src/content/docs/**/*.md');
   const images = await Astro.glob('/src/content/docs/**/*.png');
 
   const docs = await getCollection('docs');
@@ -50,77 +36,15 @@ export async function getStaticPaths() {
   console.log('paths: ', paths)
   return paths;
 
-  // return {
-  //   paths,
-  //   fallback: '404' // or 'true'/'false' depending on your needs
-  // };
 }
 
 
-// export async function getStaticPaths() {
-//   const docs = await getCollection('docs');
-//   console.log('******************************* getStaticPaths *******************************', docs )
-
-
-//   const images = await Astro.glob('/src/content/docs/**/*.png');
-//   console.log('********* images *******', images)
-
-//   const paths = docs.map(entry => ({
-//     params: { slug: entry.slug }, props: { entry },
-//   }));
-  
-//   console.log('paths: ', paths);
-//   return paths;
-// }
-
-
-// // Fetch all Markdown files and images
-// export async function getStaticPaths() {
-//   console.log('******************************* getStaticPaths *******************************', docs )
-
-//   // Fetch all Markdown files
-//   const docs = await Astro.glob('/src/content/docs/**/*.md');
-  
-//   // Fetch all image files
-//   const images = await Astro.glob('/src/content/docs/**/*.png');
-
-//   // Combine paths from Markdown and image files
-//   const paths = [
-//     ...docs.map(doc => {
-//       const slug = doc.file.replace('/src/content/docs/', '').replace('.md', '');
-//       return { params: { slug } };
-//     }),
-//     ...images.map(img => {
-//       const slug = img.file.replace('/src/content/docs/', '').replace(/\.(jpg|jpeg|png|gif)$/, '');
-//       return { params: { slug } };
-//     })
-//   ];
-
-//   return paths;
-// }
-
-// export async function get({ params }) {
-//   const { slug } = params;
-//   console.log('*********** slug: ', slug)
-//   const post = await getCollection('posts', ({ slug: entrySlug }) =>
-//     entrySlug === slug.join('/')
-//   );
-
-//   if (!post) {
-//     console.log('*********** not found *********** ');
-//     return { notFound: true };
-//   }
-
-//   return {
-//     props: { post },
-//   };
-// }
-
-
-
 const { Content } = await currentDoc.render();
+const githubLink = `https://github.com/skobba/skobba.github.io/blob/main/src/content/docs/${currentDoc.slug}.md`
 ---
 <DocsLayout Content={Content} frontmatter={}>
+  <a href={githubLink} target="_blank" rel="noopener noreferrer">Edit on GitHub</a>
+
   <Content/>
 </DocsLayout>
 

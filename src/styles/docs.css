@@ -1,0 +1,57 @@
+html,
+body {
+  background-color: red;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  background-color: yellow;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: orange;
+  padding: 10px; /* Add padding to ensure visibility */
+}
+
+.footer {
+  background-color: blue;
+  padding: 10px; /* Add padding to ensure visibility */
+}
+
+.body {
+  background-color: green;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto; /* Center the body horizontally */
+  display: flex; /* Use flexbox for horizontal layout */
+  flex-direction: row; /* Arrange children horizontally */
+  align-items: flex-start; /* Align items to the start of the cross axis (top) */
+  gap: 20px; /* Optional: add spacing between items */
+}
+
+.content {
+  background-color: rgb(247, 0, 255);
+  flex: 1;
+  word-wrap: break-word; /* Allows long words to be broken and wrapped to the next line */
+  overflow-wrap: break-word; /* Same as word-wrap, ensures compatibility */
+  white-space: normal; /* Allows wrapping, disables nowrap */
+  width: 90%; /* Ensure the content takes up the full width */
+}
+
+.scroll {
+  max-height: 100%;
+  overflow: auto;
+}
+
+.menu {
+  background-color: cyan;
+  width: 400px;
+}

@@ -20,6 +20,9 @@ body {
   line-height: 1.5;
 }
 
+header {
+  background-color: #a0faa7;
+}
 * {
   box-sizing: border-box;
 }
