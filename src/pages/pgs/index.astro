@@ -4,8 +4,7 @@ import '../../styles/global.css';
 
 
 const docs = await Astro.glob('/src/pages/pgs/**/*.md');
-
-console.log('docs: ', docs)
+// console.log('docs: ', docs)
 
 const pageTitle = 'skobba.net';
 ---
@@ -27,6 +26,6 @@ const pageTitle = 'skobba.net';
       )}
   </ul>
 
-  <h3>Debug:</h3>
-  <pre>{JSON.stringify(docs, null, 2)}</pre>
+  <!-- <h3>Debug:</h3>
+  <pre>{JSON.stringify(docs, null, 2)}</pre> -->
 </BaseLayout>

@@ -18,12 +18,14 @@ const docLinks = docs.map((doc) => {
 <BaseLayout pageTitle = {'Documentation'}>
     <h2>Documents</h2>
     <h3>Search Path: /src/content/docs</h3>
+
     <ul>
       {docLinks.map((doc) => (
         <li><a href={doc.url}>{doc.url}</a></li>
       ))}
     </ul>
-    <h3>Debug:</h3>
-    <pre>{JSON.stringify(docs, null, 2)}</pre>
+
+    <!-- <h3>Debug:</h3>
+    <pre>{JSON.stringify(docs, null, 2)}</pre> -->
 </BaseLayout>
 
