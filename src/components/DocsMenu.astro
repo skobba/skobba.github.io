@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 
 // Fetch collection
 const docs = await getCollection("docs");
+console.log(docs)
 
 // Generate links for each Markdown document
 const docLinks = docs.map((doc) => {
@@ -10,11 +11,12 @@ const docLinks = docs.map((doc) => {
     const { slug, data } = doc;
   // Extract the slug (path without the `.md` extension)
   //const slug = doc.url.replace('/src', '').replace('.md', '');
-  return `/docs/${slug}`;
+  return `${slug}`;
 });
 
 // Function to generate nested UL/LI structure
 function generateMenu(links) {
+    console.log('links: ', links)
     const menu = {};
 
     // Build the nested object structure
@@ -35,7 +37,7 @@ function generateMenu(links) {
         let ul = '<ul>';
         for (let key in items) {
             if (typeof items[key] === 'string') {
-                ul += `<li><a href="${items[key]}">${key}</a></li>`;
+                ul += `<li><a href="/docs/${items[key]}">${key}</a></li>`;
             } else {
                 ul += `<li>${key}${buildList(items[key])}</li>`;
             }

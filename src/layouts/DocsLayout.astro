@@ -18,9 +18,7 @@ const { frontmatter } = Astro.props;
   </head>
   <body>
     <div class="wrapper">
-
       <Header />
-      
       <div class="body">
         <div class="menu">
           <DocsMenu />
@@ -29,8 +27,8 @@ const { frontmatter } = Astro.props;
           <slot class="content"></slot>
         </div>
       </div>
-
       <Footer/>
+    </div>
 
     <script>
       import "../scripts/menu.js";
