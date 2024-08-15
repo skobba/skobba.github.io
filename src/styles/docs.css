@@ -3,6 +3,7 @@ body {
   background-color: red;
   display: block;
   width: 100%;
+  max-width: 100% !important;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -28,8 +29,8 @@ body {
 
 .body {
   background-color: green;
-  width: 100%;
-  max-width: 1600px;
+    width: 100%;
+    max-width: 1600px;
   margin: 0 auto; /* Center the body horizontally */
   display: flex; /* Use flexbox for horizontal layout */
   flex-direction: row; /* Arrange children horizontally */
