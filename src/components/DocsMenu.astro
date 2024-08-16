@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import '../styles/docs-menu.css';
 
 // Fetch collection
 const docs = await getCollection("docs");
@@ -39,7 +40,7 @@ function generateMenu(links) {
             if (typeof items[key] === 'string') {
                 ul += `<li><a href="/docs/${items[key]}">${key}</a></li>`;
             } else {
-                ul += `<li>${key}${buildList(items[key])}</li>`;
+                ul += `<li><span class="mappe">${key}${buildList(items[key])}</span></li>`;
             }
         }
         ul += '</ul>';
@@ -52,7 +53,47 @@ function generateMenu(links) {
 // Generate the HTML for the menu
 const menuHtml = generateMenu(docLinks);
 ---
+<style>
+    ul {
+        list-style-type: none;
+    }
+    .menu {
+        list-style-type: none;
 
+        padding-left: 0px;
+    }
+</style>
 <!-- Render the generated menu directly -->
-<div class="menu" id="menu" set:html={menuHtml}/>
+<!-- <div class="menu" id="menu" set:html={menuHtml}/> -->
 
+<!-- <ul id="menu" set:html={menuHtml}></ul> -->
+
+<div>
+
+<ul class="menu">
+    <li class="level1 file"><a href="/docs/a">Item 1</a></li>
+    <li class="level1 folder"><a href="/docs/b">Item 2</a>
+      <ul>
+        <li class="level2 file"><a href="/docs/c">Subitem 2.1</a></li>
+        <li class="level2 folder"><a href="/docs/root">root 2.2</a>
+          <ul>
+            <li class="level3 file"><a href="/docs/e">Subitem 2.2.1</a></li>
+            <li class="level3 file"><a href="/docs/f">Subitem 2.2.2</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="level1 file"><a href="/docs/api/api">Item 3</a></li>
+  </ul>
+  
+dcdc
+<div class="menu" id="menu" set:html={menuHtml}></div>
+</div>
+
+<script>
+    import "../scripts/docs-menu.js";
+ </script>
+
+<!-- <div class="menu">
+    <ul class="menu" id="menu" set:html={menuHtml}></ul>
+</div> -->

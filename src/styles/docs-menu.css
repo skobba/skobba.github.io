@@ -1,0 +1,53 @@
+/* Base styling for the menu */
+.menu, .menu ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  
+  /* Level-specific styles */
+  .level1 > a {
+    padding-left: 10px;
+    background-color: #ccc;
+  }
+  
+  .level2 > a {
+    padding-left: 20px;
+    background-color: #bbb;
+  }
+  
+  .level3 > a {
+    padding-left: 30px;
+    background-color: #aaa;
+  }
+  
+  /* Folder-specific styles */
+  .folder > a {
+    font-weight: bold;
+    cursor: pointer;
+    position: relative; /* Required for positioning the pseudo-element */
+  }
+  
+  /* Dropdown indicator */
+  .folder > a::after {
+    content: " ▼";
+    display: inline-block;
+    margin-left: 5px; /* Space between text and arrow */
+    transform: rotate(0deg); /* Initial rotation */
+  }
+  
+  /* Hide all nested lists by default */
+  .menu ul ul {
+    display: none; /* Hide all nested lists */
+  }
+  
+  /* Rotate the arrow by 180 degrees when expanded */
+  .folder.expanded > a::after {
+    transform: rotate(180deg); /* Rotate the arrow when expanded */
+  }
+  
+  /* Show submenus when expanded */
+  .folder.expanded > ul {
+    display: block; /* Show submenu when the folder is expanded */
+  }
+  
