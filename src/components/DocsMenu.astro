@@ -4,7 +4,6 @@ import '../styles/docs-menu.css';
 
 // Fetch collection
 const docs = await getCollection("docs");
-console.log(docs)
 
 // Generate links for each Markdown document
 const docLinks = docs.map((doc) => {
@@ -17,7 +16,6 @@ const docLinks = docs.map((doc) => {
 
 // Function to generate nested UL/LI structure
 function generateMenu(links) {
-    console.log('links: ', links)
     const menu = {};
 
     // Build the nested object structure
@@ -34,42 +32,42 @@ function generateMenu(links) {
     });
 
     // Function to convert the object to HTML
-    function buildList(items) {
-        let ul = '<ul>';
-        for (let key in items) {
-            if (typeof items[key] === 'string') {
-                ul += `<li><a href="/docs/${items[key]}">${key}</a></li>`;
-            } else {
-                ul += `<li><span class="mappe">${key}${buildList(items[key])}</span></li>`;
-            }
+    function buildList(items, level = 1, path = "") {
+    let ul = '<ul>';
+    for (let key in items) {
+        if (typeof items[key] === 'string') {
+            ul += `<li class="level${level} file"><a href="/docs/${items[key]}">${key}</a></li>`;
+        } else {
+            // Some what intricated way to get the slashed right
+            console.log('path + key', path +"/" + key)
+            // console.log('key : path : level: ', `${key} : ${path} : ${level}`)
+            // console.log('full path: ', `/docs/${path}${key}`)
+            // console.log('items[key]: ', items[key])
+
+            console.log('items.readme: ', items.readme)
+
+            // if (items.readme == undefined) {
+            //     ul += `<li class="level${level} folder"><a href="">${key}</a>${buildList(items[key], level + 1, path + "/" + key)}</li>`;
+
+            // } else {
+            //     ul += `<li class="level${level} folder"><a href="/docs${path}/${key}">${key}</a>${buildList(items[key], level + 1, path + "/" + key)}</li>`;
+            // }
+
+            ul += `<li class="level${level} folder"><a href="/docs${path}/${key}/readme">${key}</a>${buildList(items[key], level + 1, path + "/" + key)}</li>`;
+
         }
-        ul += '</ul>';
-        return ul;
     }
+    ul += '</ul>';
+    return ul;
+}
 
     return buildList(menu);
 }
 
 // Generate the HTML for the menu
 const menuHtml = generateMenu(docLinks);
----
-<style>
-    ul {
-        list-style-type: none;
-    }
-    .menu {
-        list-style-type: none;
 
-        padding-left: 0px;
-    }
-</style>
-<!-- Render the generated menu directly -->
-<!-- <div class="menu" id="menu" set:html={menuHtml}/> -->
-
-<!-- <ul id="menu" set:html={menuHtml}></ul> -->
-
-<div>
-
+const htmlString = `
 <ul class="menu">
     <li class="level1 file"><a href="/docs/a">Item 1</a></li>
     <li class="level1 folder"><a href="/docs/b">Item 2</a>
@@ -84,10 +82,35 @@ const menuHtml = generateMenu(docLinks);
       </ul>
     </li>
     <li class="level1 file"><a href="/docs/api/api">Item 3</a></li>
-  </ul>
-  
-dcdc
-<div class="menu" id="menu" set:html={menuHtml}></div>
+</ul>
+`;
+
+
+// console.log('html: ', menuHtml)
+---
+<style>
+    ul {
+        list-style-type: none;
+    }
+    .menu {
+        list-style-type: none;
+
+        padding-left: 0px;
+    }
+</style>
+<!-- Render the generated menu directly -->
+<!-- <div class="menu" id="menu" set:html={menuHtml}/> -->
+
+
+<div>
+    <!-- <ul id="menu" set:html={menuHtml}></ul> -->
+    <!-- <div class="menu">
+        <ul class="menu" id="menu" set:html={menuHtml}></ul>
+    </div> -->
+
+    <div class="menu" id="menu" set:html={menuHtml}/>
+
+
 </div>
 
 <script>

@@ -19,11 +19,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Navigate to the URL only if expanding
                 if (isExpanded) {
                     const href = menuItem.getAttribute('href');
+                    console.log('href: ', href)
                     if (href) {
                         // Use setTimeout to ensure that the submenu is displayed before navigation
                         setTimeout(function () {
                             window.location.href = href;
-                        }, 0);
+                        }, 10);
                     }
                 }
             }

@@ -8,17 +8,22 @@
   /* Level-specific styles */
   .level1 > a {
     padding-left: 10px;
-    background-color: #ccc;
   }
   
   .level2 > a {
     padding-left: 20px;
-    background-color: #bbb;
   }
   
   .level3 > a {
     padding-left: 30px;
-    background-color: #aaa;
+  }
+
+  .level4 > a {
+    padding-left: 40px;
+  }
+  
+  .level5 > a {
+    padding-left: 50px;
   }
   
   /* Folder-specific styles */
