@@ -1,0 +1,18 @@
+---
+const { title, content } = Astro.props;
+---
+
+<html>
+<head>
+  <title>{title}</title>
+</head>
+<body>
+  
+  <slot />
+
+  <script>
+    import "../scripts/menu.js";
+  </script>
+</body>
+</html>
+

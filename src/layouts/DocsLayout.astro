@@ -1,4 +1,5 @@
 ---
+import RootLayout from '../layouts/RootLayout.astro';
 import DocsMenu from '../components/DocsMenu.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -7,32 +8,17 @@ import '../styles/docs.css';
 
 const { frontmatter } = Astro.props;
 ---
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Documents</title>
-
-  </head>
-  <body>
-    <div class="wrapper">
-      <Header />
-      <div class="body">
-        <div class="menu">
-          <DocsMenu />
-        </div>
-        <div>
-          <slot class="content"></slot>
-        </div>
+<RootLayout>
+  <div class="wrapper">
+    <Header />
+    <div class="body">
+      <div class="menu">
+        <DocsMenu />
       </div>
-      <Footer/>
+      <div>
+        <slot class="content"></slot>
+      </div>
     </div>
-
-    <script>
-      import "../scripts/menu.js";
-    </script>
-
-  </body>
-</html>
+    <Footer/>
+  </div>
+</RootLayout>
