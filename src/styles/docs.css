@@ -29,13 +29,19 @@ body {
 
 .body {
   background-color: green;
-    width: 100%;
-    max-width: 1600px;
+  width: 100%;
+  justify-content: center;
   margin: 0 auto; /* Center the body horizontally */
   display: flex; /* Use flexbox for horizontal layout */
   flex-direction: row; /* Arrange children horizontally */
   align-items: flex-start; /* Align items to the start of the cross axis (top) */
   gap: 20px; /* Optional: add spacing between items */
+}
+
+.contentwrapper {
+  width: 100%;
+  max-width: 1200px;
+  background-color: rgb(247, 0, 255);
 }
 
 .content {
@@ -55,4 +61,8 @@ body {
 .menu {
   background-color: cyan;
   width: 400px;
+}
+
+pre {
+  width: fit-content;
 }
