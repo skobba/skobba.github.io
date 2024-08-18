@@ -59,6 +59,15 @@ const githubLink = `https://github.com/skobba/skobba.github.io/blob/main/src/con
 const { Content } = await currentDoc.render();
 ---
 <DocsLayout Content={Content} frontmatter={}>
+  <style>
+    a {
+      position: absolute; /* Positioned relative to the parent */
+      right: 10px; /* Adjust as needed */
+      background-color: #bdc7ff;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
   <a href={githubLink} target="_blank" rel="noopener noreferrer">Edit on GitHub</a>
   <Content/>
 </DocsLayout>

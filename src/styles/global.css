@@ -39,6 +39,7 @@ footer {
 }
 
 .contentwrapper {
+  position: relative;
   flex-grow: 4;
   overflow: hidden;
 }
