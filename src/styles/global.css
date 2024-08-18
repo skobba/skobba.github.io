@@ -1,6 +1,14 @@
-html {
-  background-color: #f1f5f9;
+/* html {
+  background-color: #ffae00;
   font-family: sans-serif;
+} */
+
+html, body {
+  height: 100%;       /* Makes both html and body fill the entire height of the viewport */
+  margin: 0;          /* Removes default margin */
+  padding: 0;         /* Removes default padding */
+  box-sizing: border-box; /* Ensures padding and borders are included in the element's width and height */
+  width: 100%;        /* Ensures both html and body fill the full width */
 }
 
 body {
@@ -11,6 +19,7 @@ body {
 }
 
 .wrapper {
+  height: 100%;
   display: flex;
   flex-direction: column;
 }

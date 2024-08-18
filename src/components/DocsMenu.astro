@@ -20,6 +20,12 @@ function generateMenu(links) {
 
     // Build the nested object structure
     links.forEach(link => {
+
+        // Remove readme files from folders
+        // They are used in the folder links
+        if (link.includes('readme')) {
+            return;
+        }
         const parts = link.split('/').filter(Boolean);
         let current = menu;
 
