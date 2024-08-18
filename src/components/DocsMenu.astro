@@ -3,6 +3,26 @@ import { getCollection } from "astro:content";
 import '../styles/docs-menu.css';
 import { ListFormat } from "typescript";
 
+/*
+Creates a html structure based on folder structure:
+
+<ul class="menu">
+    <li class="level1 file"><a href="/docs/a">Item 1</a></li>
+    <li class="level1 folder"><a href="/docs/b">Item 2</a>
+      <ul>
+        <li class="level2 file"><a href="/docs/c">Subitem 2.1</a></li>
+        <li class="level2 folder"><a href="/docs/root">root 2.2</a>
+          <ul>
+            <li class="level3 file"><a href="/docs/e">Subitem 2.2.1</a></li>
+            <li class="level3 file"><a href="/docs/f">Subitem 2.2.2</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="level1 file"><a href="/docs/api/api">Item 3</a></li>
+</ul>
+*/
+
 // Fetch collection
 const docs = await getCollection("docs");
 
@@ -23,6 +43,11 @@ const titleList = {
   "web/ssr": "SSR",
   "git": "Git"
 };
+
+
+function getTitle(path) {
+  return titleList[path] || "Unknown Title";
+}
 
 const sortLinks = (linkList) =>{
 
@@ -49,7 +74,6 @@ const sortLinks = (linkList) =>{
 const docLinks = docs.map((doc) => {
     const { slug, data } = doc;
   // Extract the slug (path without the `.md` extension)
-  //const slug = doc.url.replace('/src', '').replace('.md', '');
   return `${slug}`;
 });
 
@@ -58,21 +82,10 @@ function generateMenu(links) {
 
     const menu = {};
 
-    const sortedLinks = sortLinks(links);
-
-
-    // Create display name
-    const linksAndNames = sortedLinks.forEach(path => {
-        const cleanedPath = path.replace(/^\//, ""); // Remove leading slash
-        const displayName = links[cleanedPath] || cleanedPath;
-        //return { path: displayName}
-        console.log(`Path: ${path}, Display Name: ${displayName}`);
-    });
-
-
     // Build the nested object structure
-    sortedLinks.forEach(link => {
+    links.forEach(link => {
 
+        //console.log(link)
         // Remove readme files from folders
         // They are used in the folder links
         if (link.includes('readme')) {
@@ -90,66 +103,40 @@ function generateMenu(links) {
     });
 
     // Function to convert the object to HTML
-    function buildList(items, level = 1, path = "") {
-    let ul = '<ul>';
-    for (let key in items) {
-        // It´s a file
-        if (typeof items[key] === 'string') {
-            ul += `<li class="level${level} file"><a href="/docs/${items[key]}">${key}</a></li>`;
-        } 
-        // It´s a folder
-        else {
-       
+    function buildList(items, level = 1, path = "") 
+    {
+
+        let ul = '<ul>';
+        for (let key in items) {
+            // Lookup title
+            const pathTrimmed = path.replace(/^\//, "");
+            const fullPath = path === "" ? key : pathTrimmed + "/" + key;
+            const title = titleList[fullPath] || key;
             
-            // Some what intricated way to get the slashed right
-            // console.log(path +"/" + key)
-            // console.log('key : path : level: ', `${key} : ${path} : ${level}`)
-            // console.log('full path: ', `/docs/${path}${key}`)
-            // console.log('items[key]: ', items[key])
-            // console.log('items.readme: ', items.readme)
+            // It´s a file
+            if (typeof items[key] === 'string') {
+                ul += `<li class="level${level} file"><a href="/docs/${items[key]}">${title}</a></li>`;
+            } 
+            // It´s a folder
+            else {
 
-            // if (items.readme == undefined) {
-            //     ul += `<li class="level${level} folder"><a href="">${key}</a>${buildList(items[key], level + 1, path + "/" + key)}</li>`;
-
-            // } else {
-            //     ul += `<li class="level${level} folder"><a href="/docs${path}/${key}">${key}</a>${buildList(items[key], level + 1, path + "/" + key)}</li>`;
-            // }
-
-            ul += `<li class="level${level} folder"><a href="/docs${path}/${key}/readme">${key}</a>${buildList(items[key], level + 1, path + "/" + key)}</li>`;
-
+                ul += `<li class="level${level} folder"><a href="/docs${path}/${key}/readme">${title}</a>${buildList(items[key], level + 1, path + "/" + key)}</li>`;
+            }
         }
+        ul += '</ul>';
+        return ul;
     }
-    ul += '</ul>';
-    return ul;
-}
 
     return buildList(menu);
 }
 
+const sortedDocList = sortLinks(docLinks);
+
 // Generate the HTML for the menu
-const menuHtml = generateMenu(docLinks);
+const menuHtml = generateMenu(sortedDocList);
 
-const htmlString = `
-<ul class="menu">
-    <li class="level1 file"><a href="/docs/a">Item 1</a></li>
-    <li class="level1 folder"><a href="/docs/b">Item 2</a>
-      <ul>
-        <li class="level2 file"><a href="/docs/c">Subitem 2.1</a></li>
-        <li class="level2 folder"><a href="/docs/root">root 2.2</a>
-          <ul>
-            <li class="level3 file"><a href="/docs/e">Subitem 2.2.1</a></li>
-            <li class="level3 file"><a href="/docs/f">Subitem 2.2.2</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li class="level1 file"><a href="/docs/api/api">Item 3</a></li>
-</ul>
-`;
-
-
-// console.log('html: ', menuHtml)
 ---
+
 <style>
     ul {
         list-style-type: none;
