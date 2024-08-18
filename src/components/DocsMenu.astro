@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import '../styles/docs-menu.css';
+import { ListFormat } from "typescript";
 
 // Fetch collection
 const docs = await getCollection("docs");
@@ -10,6 +11,18 @@ const orderLevel1 = [
     "web",
     "git"
 ]
+
+const titleList = {
+  "kubernetes": "Kubernetes",
+  "kubernetes/components": "Components",
+  "kubernetes/components/ingress": "Ingress",
+  "kubernetes/components/loadbalancer": "Load Balancer",
+  "kubernetes/components/storage": "Storage",
+  "kubernetes/kubectl": "Kubectl",
+  "web": "Web",
+  "web/ssr": "SSR",
+  "git": "Git"
+};
 
 const sortLinks = (linkList) =>{
 
@@ -42,10 +55,20 @@ const docLinks = docs.map((doc) => {
 
 // Function to generate nested UL/LI structure
 function generateMenu(links) {
-    console.log(links)
+
     const menu = {};
 
     const sortedLinks = sortLinks(links);
+
+
+    // Create display name
+    const linksAndNames = sortedLinks.forEach(path => {
+        const cleanedPath = path.replace(/^\//, ""); // Remove leading slash
+        const displayName = links[cleanedPath] || cleanedPath;
+        //return { path: displayName}
+        console.log(`Path: ${path}, Display Name: ${displayName}`);
+    });
+
 
     // Build the nested object structure
     sortedLinks.forEach(link => {
@@ -70,16 +93,20 @@ function generateMenu(links) {
     function buildList(items, level = 1, path = "") {
     let ul = '<ul>';
     for (let key in items) {
+        // It´s a file
         if (typeof items[key] === 'string') {
             ul += `<li class="level${level} file"><a href="/docs/${items[key]}">${key}</a></li>`;
-        } else {
+        } 
+        // It´s a folder
+        else {
+       
+            
             // Some what intricated way to get the slashed right
-            console.log('path + key', path +"/" + key)
+            // console.log(path +"/" + key)
             // console.log('key : path : level: ', `${key} : ${path} : ${level}`)
             // console.log('full path: ', `/docs/${path}${key}`)
             // console.log('items[key]: ', items[key])
-
-            console.log('items.readme: ', items.readme)
+            // console.log('items.readme: ', items.readme)
 
             // if (items.readme == undefined) {
             //     ul += `<li class="level${level} folder"><a href="">${key}</a>${buildList(items[key], level + 1, path + "/" + key)}</li>`;

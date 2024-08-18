@@ -54,6 +54,7 @@ footer {
 }
 
 pre {
+  font-size: smaller;
   max-width: 100%; /* Prevents <pre> from growing beyond parent */
   width: fit-content; /* Allows <pre> to shrink to fit its content */
   white-space: pre-wrap; /* Enables wrapping inside <pre> */
