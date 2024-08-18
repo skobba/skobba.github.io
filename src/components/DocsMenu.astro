@@ -5,9 +5,35 @@ import '../styles/docs-menu.css';
 // Fetch collection
 const docs = await getCollection("docs");
 
+const orderLevel1 = [
+    "kubernetes",
+    "web",
+    "git"
+]
+
+const sortLinks = (linkList) =>{
+
+    return linkList.sort((a, b) => {
+      // Extract the top-level categories
+      const aTopLevel = a.split('/')[0];
+      const bTopLevel = b.split('/')[0];
+    
+      // Compare based on orderLevel1
+      const aIndex = orderLevel1.indexOf(aTopLevel);
+      const bIndex = orderLevel1.indexOf(bTopLevel);
+    
+      if (aIndex !== bIndex) {
+        return aIndex - bIndex;
+      }
+    
+      // If top-level categories are the same, sort alphabetically
+      return a.localeCompare(b);
+    });
+
+}
+
 // Generate links for each Markdown document
 const docLinks = docs.map((doc) => {
-    // console.log(doc)
     const { slug, data } = doc;
   // Extract the slug (path without the `.md` extension)
   //const slug = doc.url.replace('/src', '').replace('.md', '');
@@ -16,10 +42,13 @@ const docLinks = docs.map((doc) => {
 
 // Function to generate nested UL/LI structure
 function generateMenu(links) {
+    console.log(links)
     const menu = {};
 
+    const sortedLinks = sortLinks(links);
+
     // Build the nested object structure
-    links.forEach(link => {
+    sortedLinks.forEach(link => {
 
         // Remove readme files from folders
         // They are used in the folder links
