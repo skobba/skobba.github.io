@@ -3,7 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-const pageTitle = "About Me";
+const pageTitle = "About skobba.net";
 
 const identity = {
   firstName: "Gjermund",
@@ -19,6 +19,19 @@ const identity = {
     <meta name="viewport" content="width=device-width" />
     <title>{pageTitle}</title>
     <style>
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+      justify-content: center;
+      background-color: red;
+    }
+  
 		h1 {
 			color: purple;
 			font-size: 4rem;
@@ -31,21 +44,36 @@ const identity = {
   </head>
   <body>
     <Header />
-    <h1>{pageTitle}</h1>
-    <h2>... and my new Astro site!</h2>
+    <div class="content">
+      <div>
+
+        <h1>{pageTitle}</h1>
+        <h2>This domain is used by the Skobba family</h2>
+        This site is maintained by Gjermund Skobba.
     
-    <p>I am working through Astro's introductory tutorial. This is the second page on my website, and it's the first one I built myself!</p>
+        <h3>Residents:</h3>
     
-    <p>This site will update as I complete more of the tutorial, so keep checking back and see how my journey is going!</p>
-    
-    <p>Here are a few facts about me:</p>
-    <ul>
-      <li>My name is {identity.firstName}.</li>
-      <li>I live in {identity.country} and I work as a {identity.occupation}.</li>
-      {identity.hobbies.length >= 2 &&
-			<li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
-		}
-    </ul>
+        <ul>
+          <li>Gjermund Skobba (administrator)</li>
+          <li>Gunnar Skobba</li>
+          <li>Karin Skobba</li>
+          <li>Katrine Skobba</li>
+          <li>Une Skobba</li>
+        </ul>
+        
+        <p>This is the first site I use the Astro SSR framework, and so far it looks a lot better then Jekyl!</p>
+        
+        <p>Here are a few facts about us:</p>
+        <ul>
+          <li>We live in Norway</li>
+          {identity.hobbies.length >= 2 &&
+          <li>We are Trekkies</li>
+          <li>Our hobbies inclues: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
+        }
+        </ul>
+
+      </div>
+    </div>
     <Footer />
     <script>
       import "../scripts/menu.js";

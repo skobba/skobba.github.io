@@ -1,20 +1,35 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Greeting from '../components/Greeting';
+import RootLayout from '../layouts/RootLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
 const pageTitle = 'skobba.net';
 ---
-<BaseLayout pageTitle = {pageTitle}>
-  <h2>My awesome blog subtitle</h2>
-  <!-- <Greeting messages={["Hi", "Hello", "Howdy", "Hey there"]} /> -->
-   <!-- client:load -->
-  <Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]} />
+<RootLayout pageTitle = {pageTitle}>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+    }
 
+    .content {
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+      justify-content: center;
+      background-color: red;
+    }
+  </style>
+  <Header/>
+  
+  <div class="content">
+      <div>
 
-  <ul>
-    <li><a href="/docs-collection">/docs-collection</a></li>
-    <li><a href="/docs-content">/docs-content</a></li>
-    <li><a href="/docs-pages">/docs-pages</a></li>
-  </ul>
-</BaseLayout>
+        <h2>skobba.net</h2>
+        A family domain and a <a href="/docs">Developers Handbook</a>.
+      </div>
+  </div>
+
+  <Footer/>
+</RootLayout>

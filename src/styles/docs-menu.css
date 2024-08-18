@@ -4,6 +4,10 @@
     padding-left: 0;
     margin: 0;
   }
+
+  .menu {
+    width: 200px;
+  }
   
   /* Level-specific styles */
   .level1 > a {
