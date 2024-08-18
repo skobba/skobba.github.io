@@ -30,11 +30,14 @@ html, body {
   background-color: green;
   flex: 1;
   margin: 0 auto; /* Center the body horizontally */
-  max-width: 1200px;
   display: flex; /* Use flexbox for horizontal layout */
   flex-direction: row; /* Arrange children horizontally */
   justify-content: center;
   gap: 20px;
+}
+
+div.body {
+  width: 1200px;
 }
 
 footer {
@@ -44,11 +47,9 @@ footer {
   justify-content: center;
 }
 
-
 .contentwrapper {
   flex-grow: 4;
   background-color: rgba(247, 0, 255, 0.558);
-  max-width: 100%; 
   overflow: hidden;
 }
 
@@ -59,7 +60,6 @@ footer {
 
 .content {
   /* Ensure that the parent has a defined width */
-  max-width: 100%; 
   overflow: hidden;
 }
 
