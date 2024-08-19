@@ -2,14 +2,13 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Emoji from 'astro-emoji';
 
 const pageTitle = "About skobba.net";
 
 const identity = {
   firstName: "Gjermund",
-  country: "Norway",
-  occupation: "interwebdeveloper",
-  hobbies: ["birdwatching", "trainspotting"],
+  country: "Norway"
 };
 
 ---
@@ -52,23 +51,18 @@ const identity = {
         <h3>Residents:</h3>
     
         <ul>
-          <li>Gjermund Skobba (administrator)</li>
+          <li>Gjermund Skobba (interwebdeveloper)</li>
           <li>Gunnar Skobba</li>
           <li>Karin Skobba</li>
           <li>Katrine Skobba</li>
           <li>Une Skobba</li>
         </ul>
         
-        <p>This is the first site I use the Astro SSR framework, and so far it looks a lot better then Jekyl!</p>
-        
-        <p>Here are a few facts about us:</p>
-        <ul>
-          <li>We live in Norway</li>
-          {identity.hobbies.length >= 2 &&
-          <li>We are Trekkies</li>
-          <li>Our hobbies inclues: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
-        }
-        </ul>
+        Made with
+        {' Astro '}
+        <Emoji symbol="🚀" label="love" />
+        {' '}
+        SSR framework.
 
       </div>
     </div>
