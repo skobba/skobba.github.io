@@ -82,15 +82,36 @@ function generateMenu(links) {
 
     const menu = {};
 
+    // Helper function to recursively sort the menu
+    function sortMenu(obj) {
+        // Sort keys, prioritizing folders (objects) over files (strings) and sorting alphabetically
+        const sortedKeys = Object.keys(obj).sort((a, b) => {
+            const isFolderA = typeof obj[a] === 'object' && obj[a] !== null;
+            const isFolderB = typeof obj[b] === 'object' && obj[b] !== null;
+
+            if (isFolderA && !isFolderB) return -1; // Folder before file
+            if (!isFolderA && isFolderB) return 1;  // File after folder
+            return a.localeCompare(b);              // Otherwise sort alphabetically
+        });
+
+        // Reconstruct the object with sorted keys
+        const sortedObj = {};
+        sortedKeys.forEach(key => {
+            sortedObj[key] = typeof obj[key] === 'object' && obj[key] !== null ? sortMenu(obj[key]) : obj[key];
+        });
+
+        return sortedObj;
+    }
+
     // Build the nested object structure
     links.forEach(link => {
 
-        //console.log(link)
         // Remove readme files from folders
         // They are used in the folder links
         if (link.includes('readme')) {
             return;
         }
+        //console.log('link: ', link)
         const parts = link.split('/').filter(Boolean);
         let current = menu;
 
@@ -127,13 +148,14 @@ function generateMenu(links) {
         return ul;
     }
 
-    return buildList(menu);
+
+    const sortedMenu = sortMenu(menu);
+
+    return buildList(sortedMenu);
 }
 
-const sortedDocList = sortLinks(docLinks);
-
 // Generate the HTML for the menu
-const menuHtml = generateMenu(sortedDocList);
+const menuHtml = generateMenu(docLinks);
 
 ---
 
