@@ -7,6 +7,11 @@ kubectl run pod1 --image=httpd:2.4.41-alpine --dry-run=client -oyaml > pod1.yaml
 kubectl create -f pod1.yaml
 ```
 
+## Fast delete
+```sh
+kubectl delete pod x --grace-period 0 --force
+```
+
 ## Set Resourse Limits
 ```yaml
 apiVersion: v1
