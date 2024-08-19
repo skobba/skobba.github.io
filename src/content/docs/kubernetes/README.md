@@ -23,7 +23,3 @@ Factors:
 
 ### Clusters
 ![k8s-clusters.png](k8s-clusters.png)
-
-## Logical and distributed primitives:__
-
-![primitives.png](primitives.png)
