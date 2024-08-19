@@ -1,0 +1,21 @@
+---
+import TradingLayout from '../../layouts/TradingLayout.astro';
+const docs = await Astro.glob('/src/pages/trading/**/*.md');
+---
+<TradingLayout>
+  <h1>Trading</h1>
+  <h3>Search Path: /src/pages/trading</h3>
+  
+  <ul>
+    { 
+      docs.map(doc => {
+          const filePathWithoutExt = doc.file.replace(/\.[^/.]+$/, "")
+          const filePath = filePathWithoutExt.replace(/.*\/src\/pages/, '');
+          return (
+              <li>
+                  <a href={`${filePath}`}>{filePath}</a>
+              </li>
+          )}
+      )}
+  </ul>
+</TradingLayout>

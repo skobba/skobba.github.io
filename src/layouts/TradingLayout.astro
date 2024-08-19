@@ -1,0 +1,19 @@
+---
+import RootLayout from './RootLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const { frontmatter } = Astro.props;
+---
+<RootLayout>
+  <div class="wrapper">
+    <Header />
+    <div class="body">
+      <div class="contentwrapper">
+        <slot class="content"></slot>
+      </div>
+    </div>
+    <Footer/>
+  </div>
+</RootLayout>

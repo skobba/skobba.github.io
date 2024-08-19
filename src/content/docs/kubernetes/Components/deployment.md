@@ -1,8 +1,7 @@
 # Deployment
 
-## Strategy
 
-# Quick deploy and expose
+## Quick deploy and expose
 Create a deployment with a service and a pod, and then expose the pod on the node
 ```sh
 kubectl create deployment nginx-skobba --image=nginx --port=80
