@@ -1,4 +1,0 @@
-# Events
-```
-kubectl events -A
-```

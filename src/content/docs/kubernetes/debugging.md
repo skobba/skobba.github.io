@@ -4,3 +4,7 @@
 * kail
 * kubetail
 
+## Events
+```
+kubectl events -A
+```

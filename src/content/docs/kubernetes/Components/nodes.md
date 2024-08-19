@@ -1,4 +1,6 @@
-# Remove nodes
+# Nodes
+
+## Remove nodes
 
 __1. Drain the node:__
 ```
