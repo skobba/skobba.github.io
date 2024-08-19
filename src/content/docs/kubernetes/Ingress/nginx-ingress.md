@@ -1,12 +1,8 @@
 # nginx-ingress
 
-* Community version – Found in the kubernetes/ingress-nginx repo on GitHub, the community Ingress controller is based on NGINX Open Source with docs on Kubernetes.io. It is maintained by the Kubernetes community with a commitment from F5 NGINX to help manage the project
-* NGINX version – Found in the nginxinc/kubernetes-ingress repo on GitHub, NGINX Ingress Controller is developed and maintained by F5 NGINX with docs on docs.nginx.com. It is available in two editions:
-    * NGINX Open Source‑based (free and open source option)
-    * NGINX Plus-based (commercial option)
+## nginx verison
 
-
-## nginx.com (ingress-nginx)
+* github.com/nginxinc/kubernetes-ingress
 * [https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-helm/](https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-helm/)
 
 Get

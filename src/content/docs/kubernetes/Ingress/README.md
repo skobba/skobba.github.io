@@ -1,8 +1,15 @@
 # Ingress
 
-## Ingress Providers
+## Providers
 * [List of providers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
 * [Nginx Ingress Versions Table](https://gist.github.com/grigorkh/f8e4fd73e99f0fde06a51e2ed7c2156c)
+
+
+## ingress-nginx or nginx-ingress
+* __Community version__ – Found in the kubernetes/ingress-nginx repo on GitHub, the community Ingress controller is based on NGINX Open Source with docs on Kubernetes.io. It is maintained by the Kubernetes community with a commitment from F5 NGINX to help manage the project
+* __NGINX version__ – Found in the nginxinc/kubernetes-ingress repo on GitHub, NGINX Ingress Controller is developed and maintained by F5 NGINX with docs on docs.nginx.com. It is available in two editions:
+    * NGINX Open Source‑based (free and open source option)
+    * NGINX Plus-based (commercial option)
 
 ## Overview
 An ingress controller is an Kubernetes resource that routes traffics from outside the cluster to whithin the cluster.

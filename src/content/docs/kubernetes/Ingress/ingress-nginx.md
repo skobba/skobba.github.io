@@ -1,5 +1,6 @@
 # ingress-nginx
-Ref.:
+
+## Community version
 * [Docs - deploy](https://kubernetes.github.io/ingress-nginx/deploy/)
 
 ## Basic Ingress (two paths)
