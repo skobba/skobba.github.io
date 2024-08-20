@@ -1,11 +1,16 @@
 # Pod
 
 ## Create
+With label:
+```sh
+kubectl run pod1 --image=httpd:2.4.41-alpine --labels="app=myapp"
+```
+
+Edit
 ```sh
 kubectl run pod1 --image=httpd:2.4.41-alpine --dry-run=client -oyaml > pod1.yaml
 
-# Edit the pod1.yaml to your needs
-
+# Edit the pod1.yaml to your needs, labels and stuff
 kubectl create -f pod1.yaml
 ```
 
