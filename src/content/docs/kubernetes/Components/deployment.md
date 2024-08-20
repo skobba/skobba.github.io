@@ -1,5 +1,7 @@
 # Deployment
-
+* Manage pods lifecycles
+* Ensure high availability
+* Enable scaling
 
 ## Quick deploy and expose
 Create a deployment with a service and a pod, and then expose the pod on the node
@@ -9,40 +11,13 @@ kubectl create deployment nginx-skobba --image=nginx --port=80
 kubectl expose pod nginx-skobba-xxxxxxx --type NodePort --port 80
 ```
 
-## Deployment Strategies
-Ref.: [https://medium.com/@vinodvamanbhat/mastering-deployment-strategies-ensuring-smooth-application-rollouts-e9fefe1092b8](https://medium.com/@vinodvamanbhat/mastering-deployment-strategies-ensuring-smooth-application-rollouts-e9fefe1092b8)
-
-![kubernetes-deployment-strategy.png](kubernetes-deployment-strategy.png)
-
-### Big Bang Deployment
-An all-at-once approach. It means the new software version is made live simultaneously, replacing the older version. While this approach can be simple, it also carries risks. If there's a problem, the entire system can be affected.
-
-### Blue-Green Deployment
-Two separate environments – the "blue" environment, which hosts the current version of your application, and the "green" environment, which hosts the new version. When it's time to release a new update, you switch traffic from blue to green, making the new version live.
-
-### Canary Deployment
-Releasing a new version to a small subset of users or a “canary group.” This approach helps identify and address issues before a full rollout.
-* Create a new-deployment
-* Reduce the replicas on the old-deployment
-
-### Rolling Deployment
-Release the new version incrementally to a subset of your infrastructure. You gradually move from one part of your infrastructure to another until the new version is deployed everywhere.
-
-### Feature Toggle
-Release the new version incrementally to a subset of your infrastructure. You gradually move from one part of your infrastructure to another until the new version is deployed everywhere.
-
-## Basic nginx deployment
-```
-kubectl create deployment nginx-demo2 --image=nginx --port=80
-```
-
 ## Nginx deployment labels
 Unlike names and UIDs, labels do not provide uniqueness. In general, we expect many objects to carry the same label(s).
 
 Via a label selector, the client/user can identify a set of objects. The label selector is the core grouping primitive in Kubernetes.
 
 Create nginx sample from stdin
-```
+```sh
 cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
 kind: Deployment
@@ -64,6 +39,141 @@ spec:
       - image: nginx
         name: nginx-demo-container
 EOF
+```
+
+## History
+```sh
+# Show history
+kubectl rollout history deployment mydep
+
+# Show a spesific revision
+kubectl rollout history deployment mydep --revision=3
+
+# Show status
+kubectl rollout status deployment mydep
+```
+
+## Rollback
+```sh
+# Rollback one (not the new rev number)
+kubectl rollout undo deployment mydep
+
+# Rollback to a spesific version
+kubectl rollout undo deployment mydep --to-revision=3
+```
+
+## Convert pod into deployment
+1) Export the pod
+```sh
+kubectl get pod -n myns mypod -oyaml
+```
+2) Manually Remove Unnecessary Fields:
+```
+metadata.creationTimestamp
+metadata.resourceVersion
+metadata.selfLink
+metadata.uid
+metadata.annotations (if it contains auto-generated data like kubectl.kubernetes.io/last-applied-configuration)
+status (the entire status section can be removed)
+spec.nodeName
+spec.serviceAccountName.
+```
+
+3) Change kind from Pod to Deployment:
+```yaml
+kind: Deployment
+```
+
+4) Add the apiVersion for Deployments:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+```
+
+5) Wrap the spec in a template and add selector:
+* Under the spec field, add a template field, and move the entire original pod spec under it.
+* Template field should contain the pod's metadata and spec.
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydep
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: mycontainer
+        image: nginx
+        ports:
+        - containerPort: 80
+```
+
+6) Add a replicas field to define how many replicas you want:
+* Set this under the spec field at the same level as selector.
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydep
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: mycontainer
+        image: nginx
+        ports:
+        - containerPort: 80
+```
+
+### Sample
+Pod:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+  - name: mycontainer
+    image: nginx
+    ports:
+    - containerPort: 80
+```
+
+Deployment:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydep
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: mycontainer
+        image: nginx
+        ports:
+        - containerPort: 80
+
 ```
 
 ## Check Resource Limits
