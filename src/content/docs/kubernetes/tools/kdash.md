@@ -5,7 +5,12 @@ Ref.: [https://kdash.cli.rs/](https://kdash.cli.rs/)
 ```
 wget https://github.com/kdash-rs/kdash/releases/download/v0.6.0/kdash-linux.tar.gz
 tar -C /usr/local/bin -xzf kdash-linux.tar.gz
+```
 
+
+## Install Script
+```sh
+curl https://raw.githubusercontent.com/kdash-rs/kdash/main/deployment/getLatest.sh | bash
 ```
 
 ## Install Mac

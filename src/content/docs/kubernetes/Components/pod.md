@@ -4,7 +4,18 @@
 ```sh
 kubectl run pod1 --image=httpd:2.4.41-alpine --dry-run=client -oyaml > pod1.yaml
 
+# Edit the pod1.yaml to your needs
+
 kubectl create -f pod1.yaml
+```
+
+## Exec
+```sh
+# bash
+kubectl exec -it mypod -n myns -- sh
+
+# command
+kubectl exec mypod -n myns -- ls -la / 
 ```
 
 ## Fast delete

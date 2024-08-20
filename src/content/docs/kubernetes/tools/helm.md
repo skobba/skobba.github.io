@@ -20,14 +20,14 @@ foo/
     └── tests/    # The test files
 ```
 
-## Install
+## Install helm
 osx:
-```
+```sh
 brew install helm
 ```
 
 apt:
-```
+```sh
 curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | tee /usr/share/keyrings/helm.gpg > /dev/null
 apt-get install apt-transport-https --yes
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
@@ -36,14 +36,14 @@ apt-get install helm
 ```
 
 Jenkins Chart:
-```
+```sh
 helm repo add jenkins https://charts.jenkins.io
 
 helm search repo jenkins
 ```
 
 ## Repo
-```
+```sh
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
 helm search repo bitnami/word
@@ -51,41 +51,55 @@ helm search repo bitnami/word
 helm show readme bitnami/wordpress
 ```
 
-## Use
-```
-helm list --all-namespaces
+## List 
+```sh
+helm list -A
 
 helm get manifest redis-stack-server -n redis
 ```
 
 ## Render chart with template
 __helm template__ is a command-line tool provided by Helm, the Kubernetes package manager. It allows you to render Helm charts locally without installing them onto a Kubernetes cluster. This command generates Kubernetes YAML manifests based on the values provided in the chart's __values.yaml__ file and any overrides you specify.
-```
+```sh
 helm template mymysql bitnami/mysql
 ```
 
 ## Values file
-```
-helm get values myrelease
+```sh
+helm get values myrelease -n myns
 
 helm show values oci://registry-1.docker.io/bitnamicharts/keycloak
 ```
 
+## Install chart
+```sh
+# With values
+helm install -n myns my-apache bitnami/apache --set replicaCount=3
+```
+
+## Status
+```sh
+
+``` 
 ## Upgrade
 Latest version will be specified unless the '--version' flag is set.
  
 ### values
-```
+```sh
 helm upgrade dashboard kubernetes-dashboard/kubernetes-dashboard --set="service.externalPort=8080,resources.limits.cpu=200m,metricsScraper.enabled=true"
 ```
 ### reuse-values
 ```sh
-helm upgrade --reuse-values bitnami/nginx mydeployname --version=18.1.0
+# Latest
+helm upgrade -n myns mydeployname bitnami/nginx --reuse-values
+
+# Secific version
+helm upgrade -n myns mydeployname bitnami/nginx --reuse-values --version=18.1.0
 ```
 
 ## CRD
 Command to view the CRDs associated with the ArgoCD Helm chart. This can be useful for understanding the resources that ArgoCD will manage within your Kubernetes cluster.
-```
+```sh
 helm show crds <chart>
 ```
 
