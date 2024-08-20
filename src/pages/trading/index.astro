@@ -4,8 +4,13 @@ const docs = await Astro.glob('/src/pages/trading/**/*.md');
 ---
 <TradingLayout>
   <h1>Trading</h1>
+  <h3>Test pages</h3>
+  <ul>
+    <li>
+      <a href="/trading/tradedash">tradedash</a>
+  </li>
+  </ul>
   <h3>Search Path: /src/pages/trading</h3>
-  
   <ul>
     { 
       docs.map(doc => {
