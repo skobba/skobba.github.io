@@ -1,9 +1,10 @@
 # Certifications
 
 ## CKAD - Certified Kubernetes Application Developer
-
-### Curriculum
-![k8s-ckad.png](k8s-ckad.png)
+### Exam
+* 120 min / 6 min per question
+* User imperative commands instead of yaml
+* Learn how to patch specs
 
 ### What´s on the exam
 * __Core Concepts:__ API primitives & basic Pods - 13%
@@ -13,3 +14,6 @@
 * __Pod Design:__ rollouts & rollbacks, Jobs & CronJobs, metadata (labels, selectors, annotations) - 20%
 * __Services & Networking:__ Service configs, NetworkPolicies - 13%
 * __State Persistence:__ PersistentVolumeClaims - 8%
+
+### Curriculum
+![k8s-ckad.png](k8s-ckad.png)
