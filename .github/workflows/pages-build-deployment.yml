@@ -1,0 +1,16 @@
+name: pages-build-deployment
+
+on:
+  repository_dispatch:
+    types: [debug]
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Echo debug message
+      run: echo "This is a dynamic debug workflow triggered by repository_dispatch"
