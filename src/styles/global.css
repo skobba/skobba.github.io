@@ -60,7 +60,7 @@ pre {
   white-space: pre-wrap; /* Enables wrapping inside <pre> */
   overflow-x: auto; /* Adds a scrollbar if content is too wide */
   box-sizing: border-box; /* Ensures padding and border are included in width */
-  margin: 0; /* Resets any default margins */
+  padding: 5px;
 }
 
 .scroll {
