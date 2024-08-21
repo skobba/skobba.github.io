@@ -46,7 +46,7 @@ const docs = await Astro.glob('/src/pages/trading/**/*.md');
       <div id="tradingview_MSFT"></div>
       <div id="tradingview_NVDA"></div>
       <div id="tradingview_AMZN"></div>
-      <div id="tradingview_BTCUSDT"></div>
+      <div id="tradingview_BTCUSD"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
       <script type="text/javascript">
         function createWidget(containerId, symbol) {
@@ -55,7 +55,8 @@ const docs = await Astro.glob('/src/pages/trading/**/*.md');
             "height": "100%",
             "symbol": symbol,
             "interval": "15",  // Set interval to 15 minutes
-            "timezone": "Etc/UTC",
+            // "timezone": "Etc/UTC",
+            "timezone": "Europe/Oslo",  // Set timezone to Oslo
             "theme": "dark",   // Set theme to dark mode
             "style": "3",
             "locale": "en",
@@ -72,7 +73,7 @@ const docs = await Astro.glob('/src/pages/trading/**/*.md');
         createWidget("tradingview_MSFT", "NASDAQ:MSFT");
         createWidget("tradingview_NVDA", "NASDAQ:NVDA");
         createWidget("tradingview_AMZN", "NASDAQ:AMZN");
-        createWidget("tradingview_BTCUSDT", "BINANCE:BTCUSDT");
+        createWidget("tradingview_BTCUSD", "BINANCE:BTCUSD");
       </script>
     </div>
   </body>
