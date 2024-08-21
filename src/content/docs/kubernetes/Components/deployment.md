@@ -9,6 +9,10 @@ Create a deployment with a service and a pod, and then expose the pod on the nod
 kubectl create deployment nginx-skobba --image=nginx --port=80
 
 kubectl expose pod nginx-skobba-xxxxxxx --type NodePort --port 80
+
+# or
+
+kubectl expose deployment nginx-skobba --type=NodePort --port=80
 ```
 
 ## Nginx deployment labels
