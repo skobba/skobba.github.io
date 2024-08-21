@@ -1,6 +1,8 @@
 # Ambassador
 
 ## Sample
+Pod with both frontend and logging containers. The logging container will act as a proxy or logging service, while the frontend container will serve the application.
+
 ### Create Multi-container Pod
 
 ```yaml
