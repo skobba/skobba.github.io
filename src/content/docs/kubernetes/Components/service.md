@@ -1,5 +1,10 @@
 # Service
 
+## NodePort and ports above 30000
+With a Service of type NodePort, Kubernetes exposes it on a static port on each node in the cluster. By default, Kubernetes assigns ports from the 30000–32767 range to these services. This allows external traffic to access the service by connecting to any node's IP address on one of these ports.
+
+Note: Ports above 49152 are dynamic or private ports, which are typically used for ephemeral or temporary connections. The 30000–32767 range falls in between these two ranges, providing a buffer to avoid conflicts.
+
 ## Create a service for a pod
 ```sh
 # Create pod
