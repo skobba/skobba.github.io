@@ -1,7 +1,7 @@
 # Kubernetes
 * Created by Google
 * First Cloud Native project member
-* [Kubernetes Pattern](kubernetes-patterns.pdf)
+* [Kubernetes Pattern](/kubernetes-patterns.pdf)
 
 ## How many Kubernetes clusters do you need
 Administrators need to determind:
