@@ -87,10 +87,10 @@ helm install -n myns my-apache bitnami/apache --set replicaCount=3
 * Use '--install' flag if error message: "UPGRADE FAILED xxx has no deployed releases"
 
 ```sh
-helm upgrade --install internal-issue-report-apiv2 bitnami/nginx
+helm upgrade --install -n myns myrelease bitnami/nginx
 
 # With version
-helm upgrade --install internal-issue-report-apiv2 bitnami/nginx --version 18.1.10
+helm upgrade --install -n myns myrelease bitnami/nginx --version 18.1.10
 ```
 
 ### values
