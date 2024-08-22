@@ -82,8 +82,17 @@ helm install -n myns my-apache bitnami/apache --set replicaCount=3
 
 ``` 
 ## Upgrade
-Latest version will be specified unless the '--version' flag is set.
- 
+### Latest version
+* Latest version will be specified unless the '--version' flag is set.
+* Use '--install' flag if error message: "UPGRADE FAILED xxx has no deployed releases"
+
+```sh
+helm upgrade --install internal-issue-report-apiv2 bitnami/nginx
+
+# With version
+helm upgrade --install internal-issue-report-apiv2 bitnami/nginx --version 18.1.10
+```
+
 ### values
 ```sh
 helm upgrade dashboard kubernetes-dashboard/kubernetes-dashboard --set="service.externalPort=8080,resources.limits.cpu=200m,metricsScraper.enabled=true"
