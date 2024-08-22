@@ -1,5 +1,24 @@
 # PV
 
+## Create pv w/ hostPath
+```sh
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: host-path-pv
+  namespace: skobba
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /Volumes/Data
+  storageClassName: ""
+EOF
+```
+
 ## Finalizer
 Ref.: [https://www.linkedin.com/pulse/why-pv-persistent-volume-pvc-claim-get-stuck-state-due-nguyen-duc/](https://www.linkedin.com/pulse/why-pv-persistent-volume-pvc-claim-get-stuck-state-due-nguyen-duc/)
 

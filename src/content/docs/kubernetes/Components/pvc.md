@@ -1,22 +1,25 @@
 # pvc
 
-## Create
+## Create pvc
 ```sh
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: local-path-pvc
+  name: host-path-pvc
+  namespace: skobba
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 100Mi
+      storage: 2Gi
 EOF
+
+
 ```
 
-## Use
+## Use in Pod
 ```sh
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -35,7 +38,7 @@ spec:
   volumes:
   - name: my-vol
     persistentVolumeClaim:
-      claimName: local-path-pvc
+      claimName: host-path-pvc
 EOF
 ```
 

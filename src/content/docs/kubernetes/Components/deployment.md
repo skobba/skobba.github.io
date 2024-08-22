@@ -15,33 +15,37 @@ kubectl expose pod nginx-skobba-xxxxxxx --type NodePort --port 80
 kubectl expose deployment nginx-skobba --type=NodePort --port=80
 ```
 
-## Nginx deployment labels
-Unlike names and UIDs, labels do not provide uniqueness. In general, we expect many objects to carry the same label(s).
-
-Via a label selector, the client/user can identify a set of objects. The label selector is the core grouping primitive in Kubernetes.
-
-Create nginx sample from stdin
+## Sample with Volumes
+First create [pv](/docs/kubernetes/components/pv) and [pvc](/docs/kubernetes/components/pvc).
 ```sh
 cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: nginx
-  name: nginx-demo-deployment
+    app: host-path-deploy
+  name: host-path-deploy
+  namespace: skobba
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: host-path-deploy
   template:
     metadata:
       labels:
-        app: nginx
+        app: host-path-deploy
     spec:
       containers:
-      - image: nginx
-        name: nginx-demo-container
+      - image: nginx:alpine
+        name: nginx
+        volumeMounts:
+        - name: host-path-volume
+          mountPath: /myvol
+      volumes:
+      - name: host-path-volume
+        persistentVolumeClaim:
+          claimName: host-path-pvc
 EOF
 ```
 
