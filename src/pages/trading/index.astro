@@ -15,7 +15,10 @@ const docs = await Astro.glob('/src/pages/trading/**/*.md');
     { 
       docs.map(doc => {
           const filePathWithoutExt = doc.file.replace(/\.[^/.]+$/, "")
-          const filePath = filePathWithoutExt.replace(/.*\/src\/pages/, '');
+          const filePathWithoutPrefix = filePathWithoutExt.replace(/.*\/src\/pages/, '');
+          const filePath = filePathWithoutPrefix.replace(/\/index/, '');
+
+          console.log('filepath: ', filePath)
           return (
               <li>
                   <a href={`${filePath}`}>{filePath}</a>
