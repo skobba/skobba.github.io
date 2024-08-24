@@ -1,5 +1,12 @@
 # kubectl
 
+## Field Selector
+```sh
+kubectl get pods -n argocd --field-selector status.phase=Failed
+
+kubectl delete pods -n argocd --field-selector status.phase=Failed
+```
+
 ## Install bin on linux
 ```
 # Download and verify
