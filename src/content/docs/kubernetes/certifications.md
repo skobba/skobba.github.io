@@ -16,10 +16,10 @@
 * __State Persistence:__ PersistentVolumeClaims - 8%
 
 ### Tools
-* Only these web sites are allowed
-** https://kubernetes.io/docs
-** https://kubernetes.io/blog
-** https://helm.sh/docs
+Only these web sites are allowed:
+* https://kubernetes.io/docs
+* https://kubernetes.io/blog
+* https://helm.sh/docs
 * mousepad (Pref->Editor - set width=2 and spaces, not tabs)
 
 ### Important commands
