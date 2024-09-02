@@ -41,7 +41,7 @@ export async function getStaticPaths() {
 // FIX FOR MISSING FILE PATH from astro collection!
 // Find file path for github by looking up the file path from Astro.glob 
 // Use Astro.glob to get all files
-const files = await Astro.glob('/src/content/docs/**/*.md');
+const files = await Astro.glob('/src/content/docs/**/*.{md,mdx}');
 
 // Find the file that matches the id
 const matchingFile = files.find(file => {
