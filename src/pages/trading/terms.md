@@ -19,3 +19,5 @@ Breakouts are often seen as signals for potential large price movements, especia
 A retracement is a temporary reversal in the direction of a stock's price that goes against the prevailing trend but is expected to resume in the same direction. Retracements are normal and occur when the price pulls back slightly after a breakout. They often represent minor corrections within a larger trend and are used to find potential buying opportunities after a breakout.
 
 Example: If a stock breaks out above a resistance level (indicating a bullish move), a retracement might occur if the price temporarily pulls back to or near the previous resistance level, which may now act as support. Traders might use this retracement as an opportunity to enter a long position, betting that the price will resume its upward trend.
+
+## Rebound
