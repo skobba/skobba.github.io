@@ -3,8 +3,11 @@ import RootLayout from '../layouts/RootLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import '../styles/global.css';
+import Emoji from 'astro-emoji';
 
 const pageTitle = 'skobba.net';
+
 ---
 <RootLayout pageTitle = {pageTitle}>
   <style>
@@ -23,11 +26,32 @@ const pageTitle = 'skobba.net';
   <Header/>
   
   <div class="content">
-      <div>
+    <div>
+      <h2>{pageTitle}</h2>
 
-        <h2>skobba.net</h2>
-        A family domain and a <a href="/docs">Developer Handbook</a>.
-      </div>
+      A family domain and a <a href="/docs">Developer Handbook</a>.
+      
+      <br/>
+      <br/>
+      
+      This site is maintained by Gjermund Skobba for the follwing residens:
+
+      <ul>
+        <li>Gjermund Skobba (interwebdeveloper)</li>
+        <li>Gunnar Skobba</li>
+        <li>Karin Skobba</li>
+        <li>Katrine Skobba</li>
+        <li>Une Skobba</li>
+      </ul>
+      
+      Made with
+      {' Astro '}
+      <Emoji symbol="🚀" label="love" />
+      {' '}
+      SSR framework.
+
+    </div>
+
   </div>
 
   <Footer/>
